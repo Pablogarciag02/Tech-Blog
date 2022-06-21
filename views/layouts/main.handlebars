@@ -11,14 +11,26 @@
     {{!-- navbar and its contents --}}
     <nav class="bg-red-600 py-10">
         <div class="flex flex-row list-none bg-red-600 pb-8">
-            <li class="text-4xl mx-6 text-white"><a>Home</a></li>
-            <li class="text-4xl mx-6 text-white"><a>Dashboard</a></li>
-            <li class="text-4xl mx-6 text-white"><a>Login</a></li>
+            <li class="text-4xl mx-6 text-white"><a href="#">Home</a></li>
+            <li class="text-4xl mx-6 text-white"><a href="#">Dashboard</a></li>
+            {{#if loggedIn}}
+            <li class="text-4xl mx-6 text-white"><a href="#" id="logout">Logout</a></li>
+            {{else}}
+            <li class="text-4xl mx-6 text-white"><a href="/login" id="login">Login</a></li>
+            {{/if}}
         </div>
         
         <div class=" mx-6">
             <h1 class ="inline px-2 text-6xl text-orange-900 bg-white rounded-lg"><a>Your Dashboard</a></h1>
         </div>
     </nav>
+
+    <main>
+        {{{body}}}
+    </main>
 </body>
+
+{{#if loggedIn}}
+<script src="/js/logout.js"></script>
+{{/if}}
 </html>
