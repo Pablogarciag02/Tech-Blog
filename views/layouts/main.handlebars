@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Tech-Blog</title>
 </head>
 <body>
-    <nav><p>hola mundo</p></nav>
+    {{!-- navbar and its contents --}}
+    <nav class="bg-red-600 py-10">
+        <div class="flex flex-row list-none bg-red-600 pb-8">
+            <li class="text-4xl mx-6 text-white"><a>Home</a></li>
+            <li class="text-4xl mx-6 text-white"><a>Dashboard</a></li>
+            <li class="text-4xl mx-6 text-white"><a>Login</a></li>
+        </div>
+        
+        <div class=" mx-6">
+            <h1 class ="inline px-2 text-6xl text-orange-900 bg-white rounded-lg"><a>Your Dashboard</a></h1>
+        </div>
+    </nav>
 </body>
 </html>
