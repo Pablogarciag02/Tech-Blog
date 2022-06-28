@@ -1,9 +1,10 @@
 const sequelize = require("../config/connection");
+const seedPosts = require("./postsTest");
 
 const seedAll = async() => {
     await sequelize.sync({force: true});
 
-    await seedPages();
+    await seedPosts();
 
     process.exit(0);
 };
