@@ -11,18 +11,26 @@
     {{!-- navbar and its contents --}}
     <nav class="bg-red-600 py-10">
         <div class="flex flex-row list-none bg-red-600 pb-8">
-            <li class="text-4xl mx-6 text-white"><a href="#">Home</a></li>
-            <li class="text-4xl mx-6 text-white"><a href="#">Dashboard</a></li>
+            <li class="text-2xl mx-6 text-white hover:scale-105 duration-300 ease-in-out transition duration-200"><a href="/">Home</a></li>
+            {{!-- Dashboard Button --}}
             {{#if loggedIn}}
-            <li class="text-4xl mx-6 text-white"><a href="#" id="logout">Logout</a></li>
+            <li class="text-2xl mx-6 text-white hover:scale-105 duration-300 ease-in-out transition duration-200"><a href="#">Dashboard</a></li>
             {{else}}
-            <li class="text-4xl mx-6 text-white"><a href="/login" id="login">Login</a></li>
+            <li class="text-2xl mx-6 text-white hover:scale-105 duration-300 ease-in-out transition duration-200"><a href="/login">Dashboard</a></li>
+            {{/if}}
+
+            {{!-- Login/Logout Button --}}
+            {{#if loggedIn}}
+            <li class="text-2xl mx-6 text-white hover:scale-105 duration-300 ease-in-out transition duration-200"><a href="#" id="logout">Logout</a></li>
+            {{else}}
+            <li class="text-2xl mx-6 text-white hover:scale-105 duration-300 ease-in-out transition duration-200"><a href="/login" id="login">Login</a></li>
             {{/if}}
         </div>
         
-        <div class=" mx-6">
+        <div class=" mx-4">
             <h1 class ="inline px-2 text-6xl text-orange-900 bg-white rounded-lg"><a>Your Dashboard</a></h1>
         </div>
+
     </nav>
 
     <main>
