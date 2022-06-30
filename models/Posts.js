@@ -26,7 +26,7 @@ Posts.init(
                 table: "user",
                 field: "id",
             }
-        }
+        },
 
     },
     {
