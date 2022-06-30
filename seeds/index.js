@@ -2,7 +2,7 @@ const sequelize = require("../config/connection");
 const seedPosts = require("./postsTest");
 
 const seedAll = async() => {
-    await sequelize.sync({force: true});
+    await sequelize.sync();
 
     await seedPosts();
 
