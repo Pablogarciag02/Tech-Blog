@@ -10,4 +10,5 @@ Posts.belongsTo(User, {
 });
 
 
+
 module.exports = { User, Posts };
