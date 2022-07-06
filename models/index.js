@@ -12,16 +12,12 @@ User.hasMany(Comments, {
     foreignKey: "user_id",
 });
 
-//Posts belong to a user through their id.
-Posts.belongsTo(User, {
-    foreignKey: "user_id",
-});
-
-Comments.belongTo(User, {
+//Comments belong to users by their user id
+Comments.belongsTo(User, {
     foreignKey: "user_id"
 })
 
-//Comments belong to posts by their user id.
+//Comments belong to posts by their post id.
 Comments.belongsTo(Posts, {
     foreignKey: "post_id"
 })
@@ -30,6 +26,11 @@ Comments.belongsTo(Posts, {
 Posts.hasMany(Comments, {
     foreignKey: "user_id"
 })
+
+//Posts belong to a user through their id.
+Posts.belongsTo(User, {
+    foreignKey: "user_id",
+});
 
 
 
