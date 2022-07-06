@@ -1,46 +1,3 @@
-{{#if post}}
-<a href="/{{id}}">
-    <div id="{{post.id}}">
-        <div class="main-wrapper flex justify-center">
-            <div class="grid mt-10 basis-4/5">
-                <div class=" border-2 border-black rounded-lg">
-                    <div class="flex justify-between bg-red-600 display-inline border-b-2 border-black rounded-t-md">
-                        <h1 class="m-2 font-bold text-white text-xl">{{post.title}}</h1>
-                        <p class="m-2 text-white text-xs align-middle">Posted by: {{user.username}} On: {{post.createdAt}}</p>
-                    </div>
-
-                    <div class="p-3 mb-24">
-                        <p>{{post.content}}</p>
-                    </div>
-                    {{#if comment}}
-                    <div>
-                        <div class="main-wrapper flex justify-center">
-                            <div class="grid basis-full">
-                                <div class="  rounded-lg">
-                                    <div class="flex justify-between bg-red-600 display-inline border-b-2 border-black ">
-                                    <h1 class="m-2 font-bold text-white ">Comment By:{{user.username}}</h1>
-                                    <p class="m-2 text-white text-xs align-middle">On: {{comment.createdAt}}</p>
-                                    </div>
-
-                                    <div class="p-3">
-                                        <p>{{comment.content}}</p>
-                                    </div>
-                                </div>
-                            
-                            </div>
-                        </div>
-                    </div>
-                    {{/if}}
-                </div>
-            
-            </div>
-        </div>
-
-    </div>
-</a>
-{{/if}}
-
-
 {{#if loggedIn}}
     <div class="mt-5">
         <span class = "inline m-5 py-2 px-2 text-2xl text-white bg-red-600 rounded-lg" id="newCommentBtn"> 
@@ -52,9 +9,37 @@
 {{/if}}
 
 
+{{> postInfo post}}
+
+{{> comments post.comments}}
+
+{{!-- {{#if post}}
+<a href="/{{id}}">
+    <div id="{{post.id}}">
+        <div class="main-wrapper flex justify-center">
+            <div class="grid mt-10 basis-4/5">
+                <div class=" border-2 border-black rounded-lg">
+                    <div class="flex justify-between bg-red-600 display-inline border-b-2 border-black rounded-t-md">
+                        <h1 class="m-2 font-bold text-white text-xl">{{post.title}}</h1>
+                        <p class="m-2 text-white text-xs align-middle">Posted by: {{username}} On: {{post.created_at}}</p>
+                    </div>
+
+                    <div class="p-3 mb-24">
+                        <p>{{post.content}}</p>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+
+    </div>
+</a>
+{{/if}}
+ --}}
+
 <div class="modal-add-comment hidden top-0 left-0 fixed block insert-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-40" id="addCommentModal" tabindex="-1" aria-labelledby="addCommentModal" aria-modal="true" aria-hidden="true" role="dialog">
     <div class="modal-container flex justify-center p-44 mt-10 sm:mt-0">
-        <form action="comments/:userC_id" method="POST">
+        <form class="comment-form">
             <div class="shadow overflow-hidden sm:rounded-md">
                 <div class="px-10 py-5 bg-white rounded-xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-8 border-red-600 rounded-lg">
                     <div class=" px-20 "   >
@@ -63,7 +48,7 @@
 
                         <div class="pt-10">
                             <h1 class="flex justify-center text-3xl mb-2">Comment something interesting...</h1>
-                            <textarea type="text" name="coment" id="comment" autocomplete="comment" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-48 shadow-sm sm:text-sm border-0 bg-gray-200 rounded-md" placeholder="Write something interesting!"></textarea>
+                            <textarea type="text" name="comment" id="comment" autocomplete="comment" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-48 shadow-sm sm:text-sm border-0 bg-gray-200 rounded-md" placeholder="Write something interesting!"></textarea>
                         </div>
 
                         <div class= "flex justify-center pt-10 pb-2">
@@ -81,6 +66,50 @@
             </div>
         </form>
     </div>
-</div>
+</div> 
 
-<script src="./js/indexIndividual.js"></script>
+
+{{!-- {{#each comments}}
+<div>
+    <div class="main-wrapper flex justify-center">
+        <div class="grid basis-full">
+            <div class="  rounded-lg">
+                <div class="flex justify-between bg-red-600 display-inline border-b-2 border-black ">
+                <h1 class="m-2 font-bold text-white ">Comment By:{{user.username}}</h1>
+                <p class="m-2 text-white text-xs align-middle">On: {{comments.createdAt}}</p>
+                </div>
+
+                <div class="p-3">
+                    <p>{{comments.comment}}</p>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+{{/each}} --}}
+
+
+{{!-- I had to add the javascript code, directly on the html because of route errors. --}}
+<script>
+    //Defining variables for the comment logic individual.handlebars 
+
+    //Button that opens up the comment modal
+    const newcommentBtn = document.getElementById("newCommentBtn");
+
+    //Comment Modal Variables
+    const addCommentModal = document.getElementById("addCommentModal");
+    const comment = document.getElementById("comment");
+    const addCommentBtn = document.getElementById("addCommentBtn");
+    const cancelCommentBtn = document.getElementById("cancelCommentBtn");
+
+    //When the newcommentBtn is pressed, modal will appear:
+    newcommentBtn.onclick = function() {
+        addCommentModal.style.display = "flex";
+    }
+
+    //When cancel button is pressed, modal will be closed
+    cancelCommentBtn.onclick = function () {
+        addCommentModal.style.display = "none";
+    }
+</script>

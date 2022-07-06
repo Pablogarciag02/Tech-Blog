@@ -14,7 +14,7 @@
             <li class="text-2xl mx-6 text-white hover:scale-105 duration-300 ease-in-out transition duration-200"><a href="/">Home</a></li>
             {{!-- Dashboard Button --}}
             {{#if loggedIn}}
-            <li class="text-2xl mx-6 text-white hover:scale-105 duration-300 ease-in-out transition duration-200"><a href="#">Dashboard</a></li>
+            <li class="text-2xl mx-6 text-white hover:scale-105 duration-300 ease-in-out transition duration-200"><a href="/dashboard">Dashboard</a></li>
             {{else}}
             <li class="text-2xl mx-6 text-white hover:scale-105 duration-300 ease-in-out transition duration-200"><a href="/login">Dashboard</a></li>
             {{/if}}
@@ -27,9 +27,15 @@
             {{/if}}
         </div>
         
+        {{#if "/dashboard"}}
         <div class=" mx-4">
             <h1 class ="inline px-2 text-6xl text-orange-900 bg-white rounded-lg"><a>Your Dashboard</a></h1>
         </div>
+        {{else}}
+         <div class=" mx-4">
+            <h1 class ="inline px-2 text-6xl text-orange-900 bg-white rounded-lg"><a>Home</a></h1>
+        </div>
+        {{/if}}
 
     </nav>
 
@@ -39,7 +45,8 @@
 </body>
 
 {{#if loggedIn}}
-<script src="/js/logout.js"></script>
+<script src="./js/logout.js"></script>
 {{/if}}
 
 </html>
+
