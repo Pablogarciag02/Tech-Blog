@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Posts, Comments } = require('../../models');
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -68,6 +68,39 @@ router.post('/logout', (req, res) => {
   } else {
     res.status(404).end();
   }
+});
+
+router.get(":/id", (req, res) => {
+  User.findOne({
+    attributes: { exclude: ["password"] },
+    where: {
+      id: req.params.id
+    },
+    include: [
+      {
+      model: Posts,
+      attributes: ["id", "title", "content", "created_at"]
+      },
+      {
+        model: Comments,
+        attributes: ["id", "comment", "created_at"],
+        include: {
+          model: Posts,
+          attributes: ["title"]
+        }
+      }
+    ]
+  })
+  .then(dbUserData => {
+    if(!dbUserData) {
+      res.status(404).json({ message: "no User found with this id" });
+      return;
+    }
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 module.exports = router;
