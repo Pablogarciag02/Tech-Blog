@@ -1,9 +1,13 @@
 const router = require("express").Router();
 const { User, Posts, Comments } = require("../models");
+const { findAll } = require("../models/User");
 const withAuth = require("../utils/auth");
 
 router.get("/", (req, res) => {
     console.log(req.session);
+    console.log(findAll)
+    console.log(req)
+    console.log(res)
 
     Posts.findAll({
         attributes: ["id", "title", "content", "created_at"],
@@ -88,23 +92,20 @@ router.get("/post/:id", (req, res) => {
     });
 });
 
+// router.post("/", withAuth, (req, res) => {
+//     Posts.create({
+//         title: req.body.title,
+//         content: req.body.content,
+//         user_id: req.session.user_id
+//     })
+//     .then(dbPostData => res.json(dbPostData))
+//     console.log(dbPostData)
+//     .catch(err => {
+//         console.log(err);
+//         res.status(500).json(err);
+//     });
+// });
 
-
-
-
-router.post("/api/posts/:id", withAuth, (req, res) => {
-    Posts.create({
-        title: req.body.title,
-        content: req.body.content,
-        user_id: req.session.user_id
-    })
-    .then(dbPostData => res.json(dbPostData))
-    console.log(dbPostData)
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
-});
 
 
 
