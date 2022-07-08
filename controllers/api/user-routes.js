@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Posts, Comments } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -11,6 +12,8 @@ router.post('/', async (req, res) => {
     });
 
     req.session.save(() => {
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
       req.session.loggedIn = true;
 
       res.status(200).json(dbUserData);
@@ -47,6 +50,8 @@ router.post('/login', async (req, res) => {
     }
 
     req.session.save(() => {
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
       req.session.loggedIn = true;
 
       res
@@ -60,7 +65,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Logout
-router.post('/logout', (req, res) => {
+router.post('/logout', withAuth, (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
