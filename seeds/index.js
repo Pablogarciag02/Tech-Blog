@@ -5,9 +5,9 @@ const seedPosts = require("./postsTest");
 const seedAll = async() => {
     await sequelize.sync();
 
-    await seedComments();
-
     await seedPosts();
+
+    await seedComments();
 
     process.exit(0);
 };
