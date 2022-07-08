@@ -24,7 +24,7 @@ Comments.belongsTo(Posts, {
 
 //Any post has many comments, that are added to it thanks to its post_id.
 Posts.hasMany(Comments, {
-    foreignKey: "user_id"
+    foreignKey: "post_id"
 })
 
 //Posts belong to a user through their id.
