@@ -39,4 +39,35 @@ router.get("/", withAuth, (req, res) => {
     });
 });
 
+router.get("/edit/:id", withAuth, (req, res) => {
+    Posts.findOne({
+        where: {
+            id: req.params.id
+        },
+        attributes: ["id", "title", "content", "created_at"],
+        include: [
+        {
+            model: User,
+            attributes: ["username"]
+        },
+        {
+            model: Comments,
+            attributes: ["id", "comment", "post_id", "user_id", "created_at"],
+            include: {
+                model: User,
+                attributes: ["username"],
+            }
+        }
+        ]
+    })
+    .then(dbPostData => {
+        const post = dbPostData.get({ plain: true });
+        res.render("editPost", { post, loggedIn: true });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
 module.exports = router; 

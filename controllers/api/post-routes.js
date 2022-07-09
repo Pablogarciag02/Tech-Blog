@@ -93,4 +93,46 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
+router.put("/:id", withAuth, (req, res) => {
+    Posts.update({
+        title: req.body.title,
+        content: req.body.content
+        },
+        {
+        where: {
+            id: req.params.id
+        }      
+    })
+    .then(dbPostData => {
+        if(!dbPostData) {
+            res.status(404).json({ message: "no post with this id "});
+            return;
+        }
+        res.json(dbPostData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+router.delete('/:id', withAuth, (req, res) => {
+    Posts.destroy({
+        where: {
+            id: req.params.id 
+        }
+    }).then(dbCommentData => {
+        if (!dbCommentData) {
+            res.status(404).json({ message: 'No comment found with this id' });
+            return;
+        }
+        res.json(dbCommentData);
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+  });
+
+
+
 module.exports = router;
