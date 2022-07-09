@@ -5,18 +5,35 @@
         <div id="{{title}}">
         <div class="main-wrapper flex justify-center">
             <div class="grid my-4 basis-4/5">
-                <a href="/post/{{id}}">
+                {{!-- <a href="/post/{{id}}"> --}}
                     <div class=" border-2 border-black rounded-lg">
-                        <div class="flex justify-between bg-red-600 display-inline border-b-2 border-black rounded-t-md">
-                        <h1 class="m-2 font-bold text-white text-xl">{{title}}</h1>
-                        <p class="m-2 text-white text-xs align-middle">Posted by: {{user.username}} On: {{format_date created_at}}</p>
-                        </div>
+                        {{!-- <a href="/post/{{id}}"> --}}
+                            <div class="flex justify-between bg-red-600 display-inline border-b-2 border-black rounded-t-md">
+                                <h1 class="m-2 font-bold text-white text-xl">{{title}}</h1>
+                                <p class="m-2 text-white text-xs align-middle">Posted by: {{user.username}} On: {{format_date created_at}}</p>
+                            </div>
+                        {{!-- </a> --}}
 
                         <div class="p-3">
                             <p>{{this.content}}</p>
                         </div>
+
+                        <div class=" my-2 flex justify-between" >
+                            <span class = "inline m-2 py-1 px-2 text-2xl text-white bg-red-600 rounded-lg" id=""> 
+                                <a href="/dashboard/edit/{{post.id}}">
+                                    Edit Post
+                                </a>
+                            </span>
+
+                             <span class = "inline m-2 py-1 px-2 text-2xl text-white bg-red-600 rounded-lg" id=""> 
+                                <a  class="delete-post-btn">
+                                    Delete Post
+                                </a>
+                            </span>
+                        </div>
+
                     </div>
-                </a>
+                {{!-- </a> --}}
             
             </div>
         </div>
@@ -26,3 +43,5 @@
     </div>
 </section>
 {{/if}}
+
+<script src = "./js/deletePost.js"></script>

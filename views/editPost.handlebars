@@ -1,0 +1,74 @@
+{{> postInfo post}}
+
+<div class="modal-create-post top-0 left-0 fixed block insert-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-40" id="createPostmodal" tabindex="-1" aria-labelledby="createPostmodal" aria-modal="true" aria-hidden="true" role="dialog">
+    <div class="modal-container flex justify-center p-44 mt-10 sm:mt-0">
+        <form class="edit-post-form">
+            <div class="shadow overflow-hidden sm:rounded-md">
+                <div class="px-10 py-5 bg-white rounded-xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-8 border-red-600 rounded-lg">
+                    <div class=" px-20 "   >
+
+                        <h1 class="flex justify-center text-6xl">Edit Post</h1>
+
+                        <div class="pt-10">
+                            <h1 class="flex justify-center text-3xl mb-2">Edit post title</h1>
+                            <textarea type="text" name="title" id="title" autocomplete="title" value="{{post.title}}" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-24 shadow-sm sm:text-sm border-0 bg-gray-200 rounded-md" placeholder="Made a mistake? "></textarea>
+                        </div>
+
+                        <div class="pt-10">
+                            <h1 class="flex justify-center text-3xl mb-2">Edit Post Content </h1>
+                            <textarea type="text" name="content" id="content" autocomplete="content" value="{{post.content}}" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-48 shadow-sm sm:text-sm border-0 bg-gray-200 rounded-md" placeholder="Silly grammatical error?"></textarea>
+                        </div>
+
+                        <div class= "flex justify-center pt-10 pb-2">
+                            <button type="submit"  id="createPostBtn" class="inline-block mx-2 px-6 py-2.5 bg-white text-black border-2 border-black font-medium text-xs leading-tight uppercase rounded-lg shadow-md hover:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="modal">
+                            Post
+                            </button>
+
+                            <a href="/dashboard">
+                                <button type="button" class="inline-block mx-2 px-6 py-2.5 bg-red-500 text-white font-medium text-xs border-2 border-black leading-tight uppercase rounded-lg shadow-md hover:bg-red-600 transition duration-150 ease-in-out" id="cancelNewPostBtn" data-bs-dismiss="modal">
+                                    Cancel
+                                </button>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    async function editFormHandler(event) {
+        event.preventDefault();
+    
+        const title = document.querySelector('textarea[name="title"]').value;
+        const content = document.querySelector('textarea[name="content"]').value;
+        const id = window.location.toString().split('/')[
+            window.location.toString().split('/').length - 1
+        ];
+
+        const response = await fetch(`/api/posts/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                title,
+                content
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            document.location.replace('/dashboard/');
+        } else {
+            alert(response.statusText);
+        }
+    
+    }
+
+    document.querySelector('.edit-post-form').addEventListener('submit', editFormHandler);
+
+
+</script>
