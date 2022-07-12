@@ -1,3 +1,4 @@
+//Code for the user to add a post.
 async function newFormHandler(event) {
     event.preventDefault();
 

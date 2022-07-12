@@ -21,9 +21,7 @@ router.post("/", withAuth, async (req, res) => {
         comment: req.body.comment,
         post_id: req.body.post_id,
         user_id: req.session.user_id,
-      });
-    //   console.log(user_id);
-  
+      });  
       req.session.save(() => {
         req.session.loggedIn = true;
   

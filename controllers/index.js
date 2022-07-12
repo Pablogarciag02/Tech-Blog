@@ -1,3 +1,4 @@
+//Exporting all routes so that they can be called in at server.js
 const router = require("express").Router();
 
 const apiRoutes = require("./api");

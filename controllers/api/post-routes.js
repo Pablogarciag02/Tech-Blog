@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Posts, User, Comments} = require('../../models');
 const withAuth = require('../../utils/auth');
 
+//Get all posts
 router.get("/", (req, res ) => {
     Posts.findAll({
         attributes: [
@@ -32,7 +33,7 @@ router.get("/", (req, res ) => {
     });
 });
 
-
+//Get one post by id
 router.get("/:id", (req, res) => {
     Posts.findOne({
         where: {
@@ -72,6 +73,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
+//Create a post and take in the user_id of the user that created it
 router.post("/", withAuth, async (req, res) => {
     try {
       const dbPostData = await Posts.create({
@@ -93,6 +95,7 @@ router.post("/", withAuth, async (req, res) => {
     }
 });
 
+//Edit a post created by only the user that created it.
 router.put("/:id", withAuth, (req, res) => {
     Posts.update({
         title: req.body.title,
@@ -116,6 +119,7 @@ router.put("/:id", withAuth, (req, res) => {
     });
 });
 
+//Delete a post only by the user that created it.
 router.delete("/:id", withAuth, (req, res) => {
     Posts.destroy({
         where: {

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { User, Posts, Comments } = require("../models");
 const withAuth = require("../utils/auth");
 
+//Gets all posts from all users and displays them in the homepage
 router.get("/", (req, res) => {
     Posts.findAll({
         attributes: ["id", "title", "content", "created_at"],
@@ -33,7 +34,7 @@ router.get("/", (req, res) => {
 });
 
 
-
+//Route for users who are not logged in
 router.get("/login", (req, res) => {
     if(req.session.loggedIn) {
         res.redirect("/");
@@ -42,6 +43,7 @@ router.get("/login", (req, res) => {
     res.render("login")
 })
 
+//Gets an individual post by its id
 router.get("/post/:id", (req, res) => {
     Posts.findOne({
         where: {

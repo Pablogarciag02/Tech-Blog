@@ -3,6 +3,9 @@ const { Posts, User, Comments } = require("../models");
 const withAuth = require("../utils/auth");
 const sequelize = require("../config/connection");
 
+//These are the routes for the dashboard: it requires authentication to show the user his individual posts.
+
+//Get all posts belonging to user who created them
 router.get("/", withAuth, (req, res) => {
     Posts.findAll({
         where: {
@@ -39,6 +42,7 @@ router.get("/", withAuth, (req, res) => {
     });
 });
 
+//gets one individual post so that the user can select to edit, or delete it
 router.get("/edit/:id", withAuth, (req, res) => {
     Posts.findOne({
         where: {
