@@ -19,7 +19,8 @@ Comments.belongsTo(User, {
 
 //Comments belong to posts by their post id.
 Comments.belongsTo(Posts, {
-    foreignKey: "post_id"
+    foreignKey: "post_id",
+    onDelete: "CASCADE"
 })
 
 //Any post has many comments, that are added to it thanks to its post_id.

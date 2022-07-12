@@ -9,7 +9,7 @@
 </head>
 <body>
     {{!-- navbar and its contents --}}
-    <nav class="bg-red-600 py-10">
+    <nav class="bg-red-600 pt-10">
         <div class="flex flex-row list-none bg-red-600 pb-8">
             <li class="text-2xl mx-6 text-white hover:scale-105 duration-300 ease-in-out transition duration-200"><a href="/">Home</a></li>
             {{!-- Dashboard Button --}}
@@ -26,16 +26,6 @@
             <li class="text-2xl mx-6 text-white hover:scale-105 duration-300 ease-in-out transition duration-200"><a href="/login" id="login">Login</a></li>
             {{/if}}
         </div>
-        
-        {{#if "/"}}
-        <div class=" mx-4">
-            <h1 class ="inline px-2 text-6xl text-orange-900 bg-white rounded-lg"><a>Your Dashboard</a></h1>
-        </div>
-        {{else}}
-         <div class=" mx-4">
-            <h1 class ="inline px-2 text-6xl text-orange-900 bg-white rounded-lg"><a>Homepage</a></h1>
-        </div>
-        {{/if}}
 
     </nav>
 
@@ -47,19 +37,19 @@
 {{#if loggedIn}}
 <script>
     const logout = async () => {
-    const response = await fetch('/api/users/logout', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/users/logout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
         });
 
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace("/");
         } else {
-            alert('Failed to log out.');
+            alert("Failed to log out.");
         }
     };
 
-    document.querySelector('#logout').addEventListener('click', logout);
+    document.querySelector("#logout").addEventListener("click", logout);
 </script>
 {{/if}}
 

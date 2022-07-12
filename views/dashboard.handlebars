@@ -1,3 +1,17 @@
+<div class=" px-4 pb-6 bg-red-600" >
+    <h1 class ="inline px-2 text-6xl text-orange-900 bg-white rounded-lg"><a>Your Dashboard</a></h1>
+</div>
+
+{{#if loggedIn}}
+    <div class="mt-5">
+        <span class = "inline m-5 py-1 px-2 text-2xl text-white bg-red-600 rounded-lg" id="newPostBtn"> 
+            <a href="#">
+                New Post +
+            </a>
+        </span>
+    </div>
+{{/if}}
+
 {{#if posts.length }}
 <section>
     <div>
@@ -5,36 +19,28 @@
         <div id="{{title}}">
         <div class="main-wrapper flex justify-center">
             <div class="grid my-4 basis-4/5">
-                {{!-- <a href="/post/{{id}}"> --}}
-                    <div class=" border-2 border-black rounded-lg">
-                        {{!-- <a href="/post/{{id}}"> --}}
-                            <div class="flex justify-between bg-red-600 display-inline border-b-2 border-black rounded-t-md">
-                                <h1 class="m-2 font-bold text-white text-xl">{{title}}</h1>
-                                <p class="m-2 text-white text-xs align-middle">Posted by: {{user.username}} On: {{format_date created_at}}</p>
-                            </div>
-                        {{!-- </a> --}}
-
-                        <div class="p-3">
-                            <p>{{this.content}}</p>
+                <div class=" border-2 border-black rounded-lg">
+                    <a href="/post/{{id}}">
+                        <div class="flex justify-between bg-red-600 display-inline border-b-2 border-black rounded-t-md">
+                            <h1 class="m-2 font-bold text-white text-xl">{{title}}</h1>
+                            <p class="m-2 text-white text-xs align-middle">Posted by: {{user.username}} On: {{format_date created_at}}</p>
                         </div>
+                    </a>
 
-                        <div class=" my-2 flex justify-between" >
-                            <span class = "inline m-2 py-1 px-2 text-2xl text-white bg-red-600 rounded-lg" id=""> 
-                                <a href="/dashboard/edit/{{post.id}}">
-                                    Edit Post
-                                </a>
-                            </span>
+                    <div class="p-3">
+                        <p>{{this.content}}</p>
+                    </div>
 
-                             <span class = "inline m-2 py-1 px-2 text-2xl text-white bg-red-600 rounded-lg" id=""> 
-                                <a  class="delete-post-btn">
-                                    Delete Post
-                                </a>
-                            </span>
-                        </div>
+                    <div class=" my-2 flex justify-between" >
+                        <span class = "inline m-2 py-1 px-2 text-2xl text-white bg-red-600 rounded-lg" id=""> 
+                            <a href="/dashboard/edit/{{post.id}}">
+                                Edit Post
+                            </a>
+                        </span>
 
                     </div>
-                {{!-- </a> --}}
-            
+
+                </div>
             </div>
         </div>
         {{/each}}
@@ -43,5 +49,97 @@
     </div>
 </section>
 {{/if}}
+
+<div class="modal-create-post hidden top-0 left-0 fixed block insert-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-40" id="createPostmodal" tabindex="-1" aria-labelledby="createPostmodal" aria-modal="true" aria-hidden="true" role="dialog">
+    <div class="modal-container flex justify-center p-44 mt-10 sm:mt-0">
+        <form class="new-post-form">
+            <div class="shadow overflow-hidden sm:rounded-md">
+                <div class="px-10 py-5 bg-white rounded-xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-8 border-red-600 rounded-lg">
+                    <div class=" px-20 "   >
+
+                        <h1 class="flex justify-center text-6xl">+ New Post</h1>
+
+                        <div class="pt-10">
+                            <h1 class="flex justify-center text-3xl mb-2">Title for your post</h1>
+                            <textarea type="text" name="title" id="title" autocomplete="title" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-24 shadow-sm sm:text-sm border-0 bg-gray-200 rounded-md" placeholder="Add a captivating title!"></textarea>
+                        </div>
+
+                        <div class="pt-10">
+                            <h1 class="flex justify-center text-3xl mb-2">Content of your post</h1>
+                            <textarea type="text" name="content" id="content" autocomplete="content" class="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-48 shadow-sm sm:text-sm border-0 bg-gray-200 rounded-md" placeholder="Write something interesting!"></textarea>
+                        </div>
+
+                        <div class= "flex justify-center pt-10 pb-2">
+                            <button type="submit"  id="createPostBtn" class="inline-block mx-2 px-6 py-2.5 bg-white text-black border-2 border-black font-medium text-xs leading-tight uppercase rounded-lg shadow-md hover:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="modal">
+                            Post
+                            </button>
+                            <button type="button" class="inline-block mx-2 px-6 py-2.5 bg-red-500 text-white font-medium text-xs border-2 border-black leading-tight uppercase rounded-lg shadow-md hover:bg-red-600 transition duration-150 ease-in-out" id="cancelNewPostBtn" data-bs-dismiss="modal">
+                            Cancel Post
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+
+
+    //Defining variables for the homepage.handlebars
+
+    //Button that opens up the modal
+    const newPostBtn = document.getElementById("newPostBtn");
+
+    //Modal Variables
+    const createPostmodal = document.getElementById("createPostmodal");
+    const title = document.getElementById("title");
+    const content = document.getElementById("content");
+    const createPostBtn = document.getElementById("createPostBtn");
+    const cancelNewPostBtn = document.getElementById("cancelNewPostBtn");
+
+    //When new post button is pressed, modal will be shown
+    newPostBtn.onclick = function() {
+        createPostmodal.style.display = "flex";
+    }
+    //When cancel button is pressed, modal will be closed
+    cancelNewPostBtn.onclick = function () {
+        createPostmodal.style.display = "none";
+    }
+
+
+    async function newFormHandler(event) {
+        event.preventDefault();
+
+        const title = document.querySelector('textarea[name="title"]').value;
+        const content = document.querySelector('textarea[name="content"]').value;
+
+        console.log(title);
+        console.log(content);
+        
+        const response = await fetch(`/api/posts`, {
+            method: "POST",
+            body: JSON.stringify({
+            title,
+            content
+            }),
+            headers: {
+            "Content-Type": "application/json"
+            }
+        });
+
+        if (response.ok) {
+            document.location.replace("/");
+        } else {
+            alert(response.statusText);
+        }
+    }
+
+    document.querySelector(".new-post-form").addEventListener("submit", newFormHandler);
+</script>
 
 <script src = "./js/deletePost.js"></script>

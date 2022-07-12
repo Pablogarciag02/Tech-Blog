@@ -21,14 +21,18 @@
 
                         <div class= "flex justify-center pt-10 pb-2">
                             <button type="submit"  id="createPostBtn" class="inline-block mx-2 px-6 py-2.5 bg-white text-black border-2 border-black font-medium text-xs leading-tight uppercase rounded-lg shadow-md hover:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="modal">
-                            Post
+                            Save Changes
                             </button>
 
                             <a href="/dashboard">
-                                <button type="button" class="inline-block mx-2 px-6 py-2.5 bg-red-500 text-white font-medium text-xs border-2 border-black leading-tight uppercase rounded-lg shadow-md hover:bg-red-600 transition duration-150 ease-in-out" id="cancelNewPostBtn" data-bs-dismiss="modal">
+                                <button type="button" class="inline-block mx-2 px-6 py-2.5 bg-blue-500 text-white font-medium text-xs border-2 border-black leading-tight uppercase rounded-lg shadow-md hover:bg-blue-600 transition duration-150 ease-in-out" id="cancelNewPostBtn" data-bs-dismiss="modal">
                                     Cancel
                                 </button>
                             </a>
+
+                            <button type="submit"  id="delete-post-btn" class="inline-block mx-2 px-6 py-2.5 bg-red-500 text-white font-medium text-xs border-2 border-black leading-tight uppercase rounded-lg shadow-md hover:bg-red-600 transition duration-150 ease-in-out" data-bs-dismiss="modal">
+                                DELETE
+                            </button>
                         </div>
 
                     </div>
@@ -70,5 +74,33 @@
 
     document.querySelector('.edit-post-form').addEventListener('submit', editFormHandler);
 
+
+    async function deleteFormHandler(event) {
+        event.preventDefault();
+
+        const id = window.location.toString().split('/')[
+            window.location.toString().split('/').length - 1
+        ];
+
+        const response = await fetch(`/api/posts/${id}`, {
+            method: 'DELETE',
+            body: JSON.stringify({
+            post_id: id
+            }),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            document.location.replace('/dashboard/');
+        } else {
+            alert(response.statusText);
+        }
+  
+    }
+
+
+    document.querySelector('#delete-post-btn').addEventListener('click', deleteFormHandler);
 
 </script>

@@ -72,7 +72,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post('/', withAuth, async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
     try {
       const dbPostData = await Posts.create({
         title: req.body.title,
@@ -116,17 +116,17 @@ router.put("/:id", withAuth, (req, res) => {
     });
 });
 
-router.delete('/:id', withAuth, (req, res) => {
+router.delete("/:id", withAuth, (req, res) => {
     Posts.destroy({
         where: {
             id: req.params.id 
         }
-    }).then(dbCommentData => {
-        if (!dbCommentData) {
-            res.status(404).json({ message: 'No comment found with this id' });
+    }).then(dbPostData => {
+        if (!dbPostData) {
+            res.status(404).json({ message: "No comment found with this id" });
             return;
         }
-        res.json(dbCommentData);
+        res.json(dbPostData);
     }).catch(err => {
         console.log(err);
         res.status(500).json(err);

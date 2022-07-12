@@ -5,7 +5,7 @@ const withAuth = require("../../utils/auth");
 
 
 // GET all comments
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   Comments.findAll({})
       .then(dbCommentData => res.json(dbCommentData))
       .catch(err => {
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/', withAuth, async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
     try {
       const dbCommentData = await Comments.create({
         comment: req.body.comment,
@@ -36,14 +36,14 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 // DELETE COMMENT 
-router.delete('/:id', withAuth, (req, res) => {
+router.delete("/:id", withAuth, (req, res) => {
   Comments.destroy({
       where: {
           id: req.params.id 
       }
   }).then(dbCommentData => {
       if (!dbCommentData) {
-          res.status(404).json({ message: 'No comment found with this id' });
+          res.status(404).json({ message: "No comment found with this id" });
           return;
       }
       res.json(dbCommentData);

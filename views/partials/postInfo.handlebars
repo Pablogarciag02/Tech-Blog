@@ -1,23 +1,22 @@
 
-{{!-- <a href="/post/{{id}}"> --}}
-    <div id="{{id}}">
-        <div class="main-wrapper flex justify-center">
-            <div class="grid my-4 basis-4/5">
-                <div class=" border-2 border-black rounded-lg">
-                    <a href="/post/{{id}}">
-                        <div class="flex justify-between bg-red-600 display-inline border-b-2 border-black rounded-t-md">
-                        <h1 class="m-2 font-bold text-white text-xl">{{title}}</h1>
-                        <p class="m-2 text-white text-xs align-middle">Posted by: {{user.username}} On: {{format_date created_at}}</p>
-                        </div>
-                    </a>
-                    
-                    <div class="p-3">
-                        <p>{{content}}</p>
-                    </div>
-                </div>
-            
-            </div>
-        </div>
 
+<div id="{{id}}">
+    <div class="main-wrapper flex justify-center">
+        <div class="grid my-4 basis-4/5">
+            <div class=" border-2 border-black rounded-lg">
+                <a href="/post/{{id}}">
+                    <div class="flex justify-between bg-red-600 display-inline border-b-2 border-black rounded-t-md">
+                    <h1 class="m-2 font-bold text-white text-xl">{{title}}</h1>
+                    <p class="m-2 text-white text-xs align-middle">Posted by: {{user.username}} On: {{format_date created_at}}</p>
+                    </div>
+                </a>
+                
+                <div class="p-3">
+                    <p>{{content}}</p>
+                </div>
+            </div>
+        
+        </div>
     </div>
-{{!-- </a> --}}
+
+</div>
