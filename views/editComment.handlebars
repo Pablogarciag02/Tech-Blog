@@ -1,0 +1,66 @@
+<div class="modal-create-post top-0 left-0 fixed block insert-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-40" id="createPostmodal" tabindex="-1" aria-labelledby="createPostmodal" aria-modal="true" aria-hidden="true" role="dialog">
+    <div class="modal-container flex justify-center p-44 mt-10 sm:mt-0">
+        <form class="edit-post-form">
+            <div class="shadow overflow-hidden sm:rounded-md">
+                <div class="px-10 py-5 bg-white rounded-xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-8 border-red-600 rounded-lg">
+                    <div class=" px-20 "   >
+
+                        <h1 class="flex justify-center text-6xl">Delete Comment</h1>
+
+                        
+                        <div class="pt-10">
+                            <h1 class="flex justify-center text-3xl mb-2">This will delete your comment forever. Are you sure you want to delete it? </h1>
+                        </div>
+
+                        <div class= "flex justify-center pt-10 pb-2">
+                            
+
+                            <a href="/dashboard">
+                                <button type="button" class="inline-block mx-2 px-6 py-2.5 bg-blue-500 text-white font-medium text-xs border-2 border-black leading-tight uppercase rounded-lg shadow-md hover:bg-blue-600 transition duration-150 ease-in-out" id="cancelNewPostBtn" data-bs-dismiss="modal">
+                                    Cancel
+                                </button>
+                            </a>
+
+                            <button type="submit"  id="delete-comment-btn" class="inline-block mx-2 px-6 py-2.5 bg-red-500 text-white font-medium text-xs border-2 border-black leading-tight uppercase rounded-lg shadow-md hover:bg-red-600 transition duration-150 ease-in-out" data-bs-dismiss="modal">
+                                DELETE
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    async function deleteFormHandler(event) {
+        event.preventDefault();
+
+        const id = window.location.toString().split('/')[
+            window.location.toString().split('/').length - 1
+        ];
+
+        const response = await fetch(`/api/comments/${id}`, {
+            method: 'DELETE',
+            body: JSON.stringify({
+            post_id: id
+            }),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            document.location.replace('/dashboard/');
+        } else {
+            alert(response.statusText);
+        }
+  
+    }
+
+
+    document.querySelector('#delete-comment-btn').addEventListener('click', deleteFormHandler);
+</script>

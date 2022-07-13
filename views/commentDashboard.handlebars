@@ -1,0 +1,41 @@
+<div class=" px-4 pb-6 bg-red-600" >
+    <h1 class ="inline px-2 text-6xl text-orange-900 bg-white rounded-lg"><a>All Your Comments</a></h1>
+</div>
+
+{{#if comments.length }}
+<section>
+    <div>
+        {{#each comments as |Comments|}}
+        <div id="{{title}}">
+        <div class="main-wrapper flex justify-center">
+            <div class="grid my-4 basis-4/5">
+                <div class=" border-2 border-black rounded-lg">
+                    <a href="/post/{{id}}">
+                        <div class="flex justify-between bg-blue-600 display-inline border-b-2 border-black rounded-t-md">
+                            <p class="m-2 text-white text-xs align-middle">Posted by: {{user.username}} On: {{format_date created_at}}</p>
+                        </div>
+                    </a>
+
+                    <div class="p-3">
+                        <p>{{this.comment}}</p>
+                    </div>
+
+                    <div class=" my-2 flex justify-between" >
+                        <span class = "inline m-2 py-1 px-2 text-2xl text-white bg-blue-600 rounded-lg" id="delete-comment-btn"> 
+                            <a href="/dashboard/edit/comment/{{id}}" >
+                                Delete Comment
+                            </a>
+                        </span>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {{/each}}
+
+    </div>
+    </div>
+</section>
+{{/if}}
+

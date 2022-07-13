@@ -42,6 +42,33 @@ router.get("/", withAuth, (req, res) => {
     });
 });
 
+router.get("/comments", withAuth, (req, res) => {
+    Comments.findAll({
+        where: {
+            user_id: req.session.user_id
+        },
+        attributes: [
+            "id",
+            "comment",
+            "created_at"
+        ],
+        include:[
+            {
+                model: User,
+                attributes: ["username"]
+            }
+        ]
+    })
+    .then(dbCommentData => {
+        const comments = dbCommentData.map(comments => comments.get({ plain: true }));
+        res.render("commentDashboard", {comments, loggedIn: true });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
 //gets one individual post so that the user can select to edit, or delete it
 router.get("/edit/:id", withAuth, (req, res) => {
     Posts.findOne({
@@ -67,6 +94,29 @@ router.get("/edit/:id", withAuth, (req, res) => {
     .then(dbPostData => {
         const post = dbPostData.get({ plain: true });
         res.render("editPost", { post, loggedIn: true });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+router.get("/edit/comment/:id", withAuth, (req, res) => {
+    Comments.findOne({
+        where: {
+            id: req.params.id
+        },
+        attributes: ["id", "comment", "created_at"],
+        include: [
+        {
+            model: User,
+            attributes: ["username"]
+        },
+        ]
+    })
+    .then(dbCommentData => {
+        const comment = dbCommentData.get({ plain: true });
+        res.render("editComment", { comment, loggedIn: true });
     })
     .catch(err => {
         console.log(err);

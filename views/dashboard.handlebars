@@ -3,14 +3,23 @@
 </div>
 
 {{#if loggedIn}}
-    <div class="mt-5">
+    <div class="mt-5 justify-between">
         <span class = "inline m-5 py-1 px-2 text-2xl text-white bg-red-600 rounded-lg" id="newPostBtn"> 
             <a href="#">
                 New Post +
             </a>
         </span>
+
+        <span class = "inline m-5 py-1 px-2 text-2xl text-white bg-blue-600 rounded-lg" id="newPostBtn"> 
+            <a href="/dashboard/comments">
+               View all your Comments
+            </a>
+        </span>
+        
     </div>
 {{/if}}
+
+
 
 {{#if posts.length }}
 <section>
