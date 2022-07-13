@@ -75,10 +75,7 @@ router.get("/post/:id", (req, res) => {
             res.status(404).json({message: "No post found"});
             return;
         }
-        //Serializing Data
         const post = dbPostData.get({ plain: true });
-
-        //Pasing data to template
         res.render("individual", {post, loggedIn: req.session.loggedIn})
 
     })

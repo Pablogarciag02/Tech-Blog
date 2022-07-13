@@ -101,6 +101,7 @@ router.get("/edit/:id", withAuth, (req, res) => {
     });
 });
 
+//Page that goes into editComment handlebars that asks the user if he is willing to delete the post.
 router.get("/edit/comment/:id", withAuth, (req, res) => {
     Comments.findOne({
         where: {

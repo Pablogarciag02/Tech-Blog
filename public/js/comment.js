@@ -9,7 +9,7 @@ async function commentFormHandler(event) {
     window.location.toString().split("/").length - "#"
   ];
 
-  // if there is a comment -- preventing from users submitting empty comments 
+  // prevents users from submitting empty comments 
   if (comment_text) {
       const response = await fetch("/api/comments", {
         method: "POST",

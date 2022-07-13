@@ -1,4 +1,4 @@
-
+{{!-- If the user is loggedin, he is able to add a comment through this button that will pop up a modal. --}}
 {{#if loggedIn}}
     <div class="mt-5">
         <button class = "inline m-5 py-2 px-2 text-2xl text-white bg-red-600 rounded-lg" id="newCommentBtn"> 
@@ -9,12 +9,14 @@
     </div>
 {{/if}}
 
-
+{{!-- Shows individual post --}}
 {{> postInfo post}}
 
+{{!-- Shows all comments belonging to the individual post --}}
 {{> comments post.comments}}
 
 
+{{!-- Modal to add a comment --}}
 <div class="modal-add-comment hidden top-0 left-0 fixed block insert-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-40" id="addCommentModal" tabindex="-1" aria-labelledby="addCommentModal" aria-modal="true" aria-hidden="true" role="dialog">
     <div class="modal-container  flex justify-center p-44 mt-10 sm:mt-0">
         <form class="comment-form">
@@ -48,10 +50,8 @@
 
 
 
-{{!-- I had to add the javascript code, directly on the html because of route errors. --}}
-<script>
-    //Defining variables for the comment logic individual.handlebars 
 
+<script>
     //Button that opens up the comment modal
     const newcommentBtn = document.getElementById("newCommentBtn");
 
@@ -83,7 +83,7 @@
         ];
         console.log(post_id)
     
-        // if there is a comment -- preventing from users submitting empty comments 
+        //preventing from users submitting empty comments 
         if (comment) {
             const response = await fetch('/api/comments', {
             method: 'POST',

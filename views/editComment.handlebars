@@ -1,3 +1,4 @@
+{{!-- Modal that asks the user if hes sure he wants to delete the comment he selected to be deleted. --}}
 <div class="modal-create-post top-0 left-0 fixed block insert-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-40" id="createPostmodal" tabindex="-1" aria-labelledby="createPostmodal" aria-modal="true" aria-hidden="true" role="dialog">
     <div class="modal-container flex justify-center p-44 mt-10 sm:mt-0">
         <form class="edit-post-form">
@@ -34,6 +35,7 @@
     </div>
 </div>
 
+{{!-- Script that will then get the id in the search bar, and execute the delete route for said comment by its id. --}}
 <script>
 
     async function deleteFormHandler(event) {
@@ -44,12 +46,12 @@
         ];
 
         const response = await fetch(`/api/comments/${id}`, {
-            method: 'DELETE',
+            method: "DELETE",
             body: JSON.stringify({
             post_id: id
             }),
             headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
             }
         });
         
@@ -62,5 +64,6 @@
     }
 
 
-    document.querySelector('#delete-comment-btn').addEventListener('click', deleteFormHandler);
+    document.querySelector("#delete-comment-btn").addEventListener("click", deleteFormHandler);
+    
 </script>

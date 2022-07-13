@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
       })
 });
 
-
+//Create new comments with the user id of the user thats signed in.
 router.post("/", withAuth, async (req, res) => {
     try {
       const dbCommentData = await Comments.create({
