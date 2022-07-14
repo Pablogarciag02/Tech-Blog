@@ -4,7 +4,7 @@
 https://github.com/Pablogarciag02/Tech-Blog
 
 ## Heroku link
-[Heroku-Deployed-App](https://note-taker-pablogarciag02.herokuapp.com/)
+[Heroku-Deployed-App](https://tech-blog-adineradomx.herokuapp.com/)
 ## About this Project
 -Every Developer loves talking about new discoveries and saying why the programing language he knows is the best.
 
@@ -42,7 +42,7 @@ Log in or sign up to make an account.
 
 ### Use the deployed app through this link:
 Deployed-App:
-https://note-taker-pablogarciag02.herokuapp.com/
+https://tech-blog-adineradomx.herokuapp.com/
 
 
 ### Installation for dev
@@ -91,4 +91,4 @@ SOFTWARE.
 -Connected to a database
 
 ## Contribution
-Feel free to fork and use this project for your personal use if you are a business owner, or a busy student. Or if you want to make it better you can ask for a pull request 
+Feel free to fork and use this project for your personal use. Or if you want to make it better you can ask for a pull request 
