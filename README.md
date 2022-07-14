@@ -26,8 +26,8 @@ This project uses
 
 
 
-![Example](/Assets/homepage.png)
-![Example2](/Assets/login.png)
+![Example](/assets/homepage.png)
+![Example2](/assets/login.png)
 Generate an HTML with the info of each worker.
 
 ## Table of Contents
