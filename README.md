@@ -27,8 +27,10 @@ This project uses
 
 
 ![Example](/assets/homepage.png)
+Talk about tech, stocks and crypto!!!
+
 ![Example2](/assets/login.png)
-Generate an HTML with the info of each worker.
+Log in or sign up to make an account.
 
 ## Table of Contents
 -Installation
