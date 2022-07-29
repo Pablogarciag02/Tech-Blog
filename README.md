@@ -91,4 +91,4 @@ SOFTWARE.
 -Connected to a database
 
 ## Contribution
-Feel free to fork and use this project for your personal use. Or if you want to make it better you can ask for a pull request 
+Feel free to fork and use this project for your personal use. Or if you want to make it better you can ask for a pull request.
